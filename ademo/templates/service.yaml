@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ template "ademo.fullname" . }}
+  labels:
+    app: {{ template "ademo.name" . }}
+    chart: {{ template "ademo.chart" . }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: {{ .Values.service.port }}
+      targetPort: {{ .Values.service.port }}
+      protocol: TCP
+      name: http
+      nodePort: {{ .Values.service.nodeport }}
+  selector:
+    app: {{ template "ademo.name" . }}
+    release: {{ .Release.Name }}

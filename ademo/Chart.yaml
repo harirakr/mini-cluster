@@ -1,0 +1,6 @@
+name: ademo
+version: 1.0.0
+description: a docker-minikube-helm demo
+maintainers:
+  - name: Hari
+  - twitter: harirkris

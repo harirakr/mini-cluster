@@ -1,0 +1,22 @@
+
+replicaCount: 2
+
+resourcerequests:
+  cpu: 200m
+
+image:
+  repository: harirakr/gohello
+  tag: latest
+  pullPolicy: IfNotPresent
+
+service:
+  type: LoadBalancer
+  port: 8080
+  nodeport: 30101
+
+autoscaling:
+  name: ademo-hpa
+  enabled: true
+  minreplicas: 2
+  maxreplicas: 4
+  targetCPUUtilizationPercentage: 50 
