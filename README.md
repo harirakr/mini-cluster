@@ -1,3 +1,4 @@
+
 # mini-cluster
 minikube-based cluster deployment
 
@@ -40,6 +41,6 @@ Hello, world.
 ```
 ### After upgrade
 ```console
-$ curl minikube:30101
+curl minikube:30101
 Hello, world!
 ```
