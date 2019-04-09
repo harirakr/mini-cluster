@@ -27,7 +27,8 @@ if [ "${cmd}" == "init" ]; then
      -p '{"spec":{"template":{"spec":{"serviceAccount":"tiller"}}}}'
 
   echo "running helm install"
-  helm install --debug --set image.repository="${image_repo}" --set image.tag="${image_tag}" --namespace default ./ademo
+  helm install --debug --set image.repository="${image_repo}" \
+     --set image.tag="${image_tag}" --namespace default ./ademo
 
 elif [ "${cmd}" == "upgrade" ]; then
   echo "In upgrade"
