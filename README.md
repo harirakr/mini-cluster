@@ -14,7 +14,7 @@ minikube addons enable metrics-server
 
 ## Build image
 ```console
-docker build . -t candidate-image
+docker build . -t harirakr/ademo-dock:v1
 ```
 
 ## Run image
@@ -23,7 +23,7 @@ docker run \
     -v ~/.minikube:/root/.minikube \
     -v ~/.kube:/root/.kube \
     --add-host=kubernetes:<minikube-ip> \
-    candidate-image init d0x2f/http-hello-world:v1.0.0
+    harirakr/ademo-dock:v1 init d0x2f/http-hello-world:v1.0.0
 ```
 
 ## Upgrade application
@@ -32,7 +32,7 @@ docker run \
     -v ~/.minikube:/root/.minikube \
     -v ~/.kube:/root/.kube \
     --add-host=kubernetes:<minikube-ip> \
-    candidate-image upgrade d0x2f/http-hello-world:v2.0.0
+    harirakr/ademo-dock:v1 upgrade d0x2f/http-hello-world:v2.0.0
 ```
 
 ## Check for service reachability
