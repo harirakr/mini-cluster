@@ -21,6 +21,7 @@ docker build . -t candidate-image
 ```console
 docker run \
     -v ~/.minikube:/root/.minikube \
+    -v ~/.kube:/root/.kube \
     --add-host=kubernetes:<minikube-ip> \
     candidate-image init d0x2f/http-hello-world:v1.0.0
 ```
@@ -29,6 +30,7 @@ docker run \
 ```console
 docker run \
     -v ~/.minikube:/root/.minikube \
+    -v ~/.kube:/root/.kube \
     --add-host=kubernetes:<minikube-ip> \
     candidate-image upgrade d0x2f/http-hello-world:v2.0.0
 ```
@@ -36,11 +38,11 @@ docker run \
 ## Check for service reachability
 ### After deployment
 ```console
-curl minikube:30101
+curl "$(minikube ip)":30101
 Hello, world.
 ```
 ### After upgrade
 ```console
-curl minikube:30101
+curl "$(minikube ip)":30101
 Hello, world!
 ```
