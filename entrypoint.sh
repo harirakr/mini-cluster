@@ -17,7 +17,12 @@ image_tag=$(echo "${image}" | cut -f2 -d ":")
 
 if [ "${cmd}" == "init" ]; then
   echo "In init"
-  helm init --tiller-connection-timeout 300
+  helm init --wait --tiller-connection-timeout 300
+
+  if [ "$(kubectl get pods -n kube-system -o name |grep tiller)" -ne 0 ]; then
+    echo "Return $?: Issue with deploying tiller"
+    exit 1
+  fi
 
   # Add serviceaccount to tiller with clusterrole=cluster-admin
   kubectl create serviceaccount --namespace kube-system tiller
@@ -32,9 +37,14 @@ if [ "${cmd}" == "init" ]; then
 
 elif [ "${cmd}" == "upgrade" ]; then
   echo "In upgrade"
-  release=$(helm ls | awk '/ademo-1.0.0/ {print $1}')
-  helm upgrade --debug "${release}" ./ademo --set image.repository="${image_repo}" \
-     --set image.tag="${image_tag}" --namespace default 
+  release=$(helm ls | awk '/DEPLOYED.*ademo-1.0.0/ {print $1}' | head -1)
+  if [ -n "${release}" ]; then
+    helm upgrade --debug "${release}" ./ademo --set image.repository="${image_repo}" \
+       --set image.tag="${image_tag}" --namespace default 
+  else
+    echo "Could not find prior deployment"
+    exit 1
+  fi
 else 
   echo "ERROR: Invalid option ${cmd}"
   exit 1
