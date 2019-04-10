@@ -17,6 +17,10 @@ minikube addons enable metrics-server
 docker build . -t harirakr/ademo-dock:v1
 ```
 
+## Non-root users on host system
+Edit ~/.kube/config in host
+Set the `certificate-authority` and `client-certificate` paths to `/root/.minikube`
+
 ## Run image
 ```console
 docker run \
