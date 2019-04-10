@@ -1,6 +1,6 @@
 # Solution approach
 
-## OPTION 1
+## FIRST ATTEMPT
 Use a helm-kubectl container to build on.
 Build a docker container with an entrypoint script to invoke a helm chart.
 The helm chart will be configured to deploy pods, load-balancer, 
