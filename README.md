@@ -26,7 +26,7 @@ Set the `certificate-authority` and `client-certificate` paths to `/root/.miniku
 docker run \
     -v ~/.minikube:/root/.minikube \
     -v ~/.kube:/root/.kube \
-    --add-host=kubernetes:<minikube-ip> \
+    --add-host=kubernetes:$(minikube ip) \
     harirakr/ademo-dock:v1 init d0x2f/http-hello-world:v1.0.0
 ```
 
@@ -35,7 +35,7 @@ docker run \
 docker run \
     -v ~/.minikube:/root/.minikube \
     -v ~/.kube:/root/.kube \
-    --add-host=kubernetes:<minikube-ip> \
+    --add-host=kubernetes:$(minikube ip) \
     harirakr/ademo-dock:v1 upgrade d0x2f/http-hello-world:v2.0.0
 ```
 
